@@ -8,10 +8,17 @@
 
 import UIKit
 
-class PhotosViewController: UIViewController {
+class PhotosViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    @IBOutlet weak var tableView: UITableView!
+    
     var post: [[String:AnyObject]] = []
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        self.tableView.dataSource = self;
+        self.tableView.delegate = self;
+        
         let apiKey = "Q6vHoaVm5L1u2ZAW1fqv3Jw48gFzYVg9P0vH0VHl3GVy6quoGV"
         let url = URL(string:"https://api.tumblr.com/v2/blog/humansofnewyork.tumblr.com/posts/photo?api_key=\(apiKey)")
         let request = URLRequest(url: url!)
@@ -41,6 +48,19 @@ class PhotosViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PhotoCell") as! PhotoCell
+        cell.textLabel?.text = "This is row \(indexPath.row)"
+        
+        return cell
+    }
+    
+    
+    
 
 }
 

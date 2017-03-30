@@ -14,6 +14,7 @@
 		E29B63D11E8CA2EF0040E5D7 /* Tumblr.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E29B63CF1E8CA2EF0040E5D7 /* Tumblr.xcdatamodeld */; };
 		E29B63D31E8CA2EF0040E5D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E29B63D21E8CA2EF0040E5D7 /* Assets.xcassets */; };
 		E29B63D61E8CA2EF0040E5D7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E29B63D41E8CA2EF0040E5D7 /* LaunchScreen.storyboard */; };
+		E29B63DE1E8CAABA0040E5D7 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B63DD1E8CAAB90040E5D7 /* PhotoCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		E29B63D21E8CA2EF0040E5D7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E29B63D51E8CA2EF0040E5D7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E29B63D71E8CA2EF0040E5D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E29B63DD1E8CAAB90040E5D7 /* PhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		FFCB97D7CFE6A006590A9E6C /* Pods-Tumblr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tumblr.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tumblr/Pods-Tumblr.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -87,6 +89,7 @@
 				E29B63D41E8CA2EF0040E5D7 /* LaunchScreen.storyboard */,
 				E29B63D71E8CA2EF0040E5D7 /* Info.plist */,
 				E29B63CF1E8CA2EF0040E5D7 /* Tumblr.xcdatamodeld */,
+				E29B63DD1E8CAAB90040E5D7 /* PhotoCell.swift */,
 			);
 			path = Tumblr;
 			sourceTree = "<group>";
@@ -214,6 +217,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E29B63DE1E8CAABA0040E5D7 /* PhotoCell.swift in Sources */,
 				E29B63D11E8CA2EF0040E5D7 /* Tumblr.xcdatamodeld in Sources */,
 				E29B63CB1E8CA2EF0040E5D7 /* PhotosViewController.swift in Sources */,
 				E29B63C91E8CA2EF0040E5D7 /* AppDelegate.swift in Sources */,

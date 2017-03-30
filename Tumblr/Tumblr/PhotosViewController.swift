@@ -23,6 +23,18 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
         self.tableView.delegate = self;
         self.tableView.rowHeight = 240;
         
+        self.tableView.refreshControl = UIRefreshControl();
+        self.tableView.refreshControl?.addTarget(self, action: #selector(refreshTable), for: UIControlEvents.allEvents);
+        
+        refreshTable();
+        
+        // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    
+    
+    func refreshTable () {
+        
         let apiKey = "Q6vHoaVm5L1u2ZAW1fqv3Jw48gFzYVg9P0vH0VHl3GVy6quoGV"
         let url = URL(string:"https://api.tumblr.com/v2/blog/humansofnewyork.tumblr.com/posts/photo?api_key=\(apiKey)")
         let request = URLRequest(url: url!)
@@ -35,6 +47,8 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
         let task : URLSessionDataTask = session.dataTask(with: request,completionHandler: {[weak self] (dataOrNil, response, error) in
             if let data = dataOrNil {
                 if let responseDictionary = try! JSONSerialization.jsonObject(with: data, options:[]) as? NSDictionary {
+                    self?.tableView.refreshControl?.endRefreshing();
+                    
                     NSLog("response: \(responseDictionary)")
                     
                     let dictionary = responseDictionary.value(forKey: "response") as! NSDictionary
@@ -42,10 +56,9 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
                     self?.tableView.reloadData();
                 }
             }
-        });
+            });
         task.resume()
-        
-        // Do any additional setup after loading the view, typically from a nib.
+
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

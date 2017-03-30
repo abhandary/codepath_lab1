@@ -7,17 +7,21 @@
 //
 
 import UIKit
+import AFNetworking
+
+
 
 class PhotosViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
     
-    var post: [[String:AnyObject]] = []
+    var posts: [NSDictionary] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
         self.tableView.dataSource = self;
         self.tableView.delegate = self;
+        self.tableView.rowHeight = 240;
         
         let apiKey = "Q6vHoaVm5L1u2ZAW1fqv3Jw48gFzYVg9P0vH0VHl3GVy6quoGV"
         let url = URL(string:"https://api.tumblr.com/v2/blog/humansofnewyork.tumblr.com/posts/photo?api_key=\(apiKey)")
@@ -34,7 +38,8 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
                     NSLog("response: \(responseDictionary)")
                     
                     let dictionary = responseDictionary.value(forKey: "response") as! NSDictionary
-                    self?.post = dictionary.value(forKey: "posts") as! [[String : AnyObject]]
+                    self?.posts = dictionary["posts"] as! [NSDictionary]
+                    self?.tableView.reloadData();
                 }
             }
         });
@@ -49,18 +54,26 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return self.posts.count;
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PhotoCell") as! PhotoCell
-        cell.textLabel?.text = "This is row \(indexPath.row)"
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: "PhotoCellReuseID", for: indexPath) as! PhotoCell
+        // let cell = tableView.dequeueReusableCell(withIdentifier: "PhotoCellReuseID") as! PhotoCell
+        
+        let post = posts[indexPath.row]
+        if let photos = post["photos"] as? [NSDictionary] {
+            let imageUrlString = photos[0].value(forKeyPath: "original_size.url") as? String
+            if let imageUrl = URL(string: imageUrlString!) {
+                cell.photoImageView.setImageWith(imageUrl);
+            }
+        }
+      //  cell.textLabel?.text = "This is row \(indexPath.row)"
         
         return cell
     }
     
-    
-    
+ 
 
 }
 

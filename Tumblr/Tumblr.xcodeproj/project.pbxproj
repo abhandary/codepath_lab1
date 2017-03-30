@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1EEAAAC61E8CB56100A9A922 /* PhotoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEAAAC51E8CB56100A9A922 /* PhotoDetailViewController.swift */; };
 		A16B0A0E0104369FB3CC0C10 /* Pods_Tumblr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77DC1BEF89E56E89B412C7DE /* Pods_Tumblr.framework */; };
 		E29B63C91E8CA2EF0040E5D7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B63C81E8CA2EF0040E5D7 /* AppDelegate.swift */; };
 		E29B63CB1E8CA2EF0040E5D7 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B63CA1E8CA2EF0040E5D7 /* PhotosViewController.swift */; };
@@ -19,6 +20,7 @@
 
 /* Begin PBXFileReference section */
 		1EE15DF74143D376671A259B /* Pods-Tumblr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tumblr.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tumblr/Pods-Tumblr.release.xcconfig"; sourceTree = "<group>"; };
+		1EEAAAC51E8CB56100A9A922 /* PhotoDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoDetailViewController.swift; path = ../PhotoDetailViewController.swift; sourceTree = "<group>"; };
 		77DC1BEF89E56E89B412C7DE /* Pods_Tumblr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tumblr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E29B63C51E8CA2EF0040E5D7 /* Tumblr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tumblr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E29B63C81E8CA2EF0040E5D7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 		E29B63C71E8CA2EF0040E5D7 /* Tumblr */ = {
 			isa = PBXGroup;
 			children = (
+				1EEAAAC51E8CB56100A9A922 /* PhotoDetailViewController.swift */,
 				E29B63C81E8CA2EF0040E5D7 /* AppDelegate.swift */,
 				E29B63CA1E8CA2EF0040E5D7 /* PhotosViewController.swift */,
 				E29B63CC1E8CA2EF0040E5D7 /* Main.storyboard */,
@@ -220,6 +223,7 @@
 				E29B63DF1E8CAFA70040E5D7 /* PhotoCell.swift in Sources */,
 				E29B63D11E8CA2EF0040E5D7 /* Tumblr.xcdatamodeld in Sources */,
 				E29B63CB1E8CA2EF0040E5D7 /* PhotosViewController.swift in Sources */,
+				1EEAAAC61E8CB56100A9A922 /* PhotoDetailViewController.swift in Sources */,
 				E29B63C91E8CA2EF0040E5D7 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

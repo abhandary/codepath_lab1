@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Photos View Controller-->
+        <!--CodePathLab1-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="PhotosViewController" customModule="Tumblr" customModuleProvider="target" sceneMemberID="viewController">
@@ -22,22 +22,22 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="PhotoCellReuseID" id="5XR-0w-khD" customClass="PhotoCell" customModule="Tumblr">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="com.tumblr.cell" id="beP-f8-zjX" customClass="PhotoCell" customModule="Tumblr" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5XR-0w-khD" id="iQ0-IH-xQz">
-                                            <rect key="frame" x="0.0" y="0.0" width="308" height="43"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="beP-f8-zjX" id="FUj-p5-uh5">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" id="GUV-yV-bGw">
-                                                    <rect key="frame" x="0.0" y="-12" width="308" height="55"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" id="kcl-26-piB" userLabel="photo">
+                                                    <rect key="frame" x="0.0" y="0.0" width="407" height="44"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="photoImageView" destination="GUV-yV-bGw" id="1Oi-4e-sDk"/>
-                                            <segue destination="khI-4K-WVM" kind="push" identifier="PhotoDetail" trigger="accessoryAction" id="4JX-Sf-jYM"/>
+                                            <outlet property="photoView" destination="kcl-26-piB" id="BT2-gR-Du8"/>
+                                            <segue destination="khI-4K-WVM" kind="push" identifier="PhotoDetail" id="kfm-w8-Xg0"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -45,7 +45,7 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Uzv-hW-L8L"/>
+                    <navigationItem key="navigationItem" title="CodePathLab1" id="Uzv-hW-L8L"/>
                     <connections>
                         <outlet property="tableView" destination="8Ou-bK-WNP" id="UAs-Un-1RR"/>
                     </connections>
@@ -57,7 +57,7 @@
         <!--Photo Detail View Controller-->
         <scene sceneID="6Ur-jC-3CC">
             <objects>
-                <viewController id="khI-4K-WVM" customClass="PhotoDetailViewController" customModule="Tumblr" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController extendedLayoutIncludesOpaqueBars="YES" automaticallyAdjustsScrollViewInsets="NO" id="khI-4K-WVM" customClass="PhotoDetailViewController" customModule="Tumblr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jD4-EJ-8Pr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -72,7 +72,7 @@
         <!--Navigation Controller-->
         <scene sceneID="19t-B8-iBE">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SAd-iE-vdj" sceneMemberID="viewController">
+                <navigationController id="SAd-iE-vdj" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="8vT-Fc-G1i">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>

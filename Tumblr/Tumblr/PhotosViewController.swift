@@ -17,17 +17,23 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
     var posts: [NSDictionary] = []
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+        self.view.translatesAutoresizingMaskIntoConstraints = true
+        self.edgesForExtendedLayout = []
         self.tableView.dataSource = self;
         self.tableView.delegate = self;
-        self.tableView.rowHeight = 240;
-        
+        self.tableView.rowHeight = UITableViewAutomaticDimension;
+        self.tableView.estimatedRowHeight = 100
         self.tableView.refreshControl = UIRefreshControl();
+        self.tableView.tableHeaderView = UIView(frame:CGRect.zero)
         self.tableView.refreshControl?.addTarget(self, action: #selector(refreshTable), for: UIControlEvents.allEvents);
         
-        refreshTable();
+        self.tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 320, height: 50))
+        let loadingview = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        loadingview.startAnimating()
+        loadingview.center = (self.tableView.tableFooterView?.center)!
+        self.tableView.tableFooterView?.addSubview(loadingview)
         
+        refreshTable();
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -63,8 +69,9 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "PhotoDetail" {
-              let vc = segue.destination as! PhotoDetailViewController
-              let indexPath = tableView.indexPath(for: sender as! UITableViewCell )
+            let cell = sender as? PhotoCell
+            let vc = segue.destination as! PhotoDetailViewController
+            vc.photo = (cell?.photoView?.image)!
         }
     }
     
@@ -78,18 +85,31 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.posts.count;
+        return 1
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return self.posts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: "PhotoCellReuseID", for: indexPath) as! PhotoCell
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: "com.tumblr.cell", for: indexPath) as! PhotoCell
         // let cell = tableView.dequeueReusableCell(withIdentifier: "PhotoCellReuseID") as! PhotoCell
         
-        let post = posts[indexPath.row]
+        let post = posts[indexPath.section]
         if let photos = post["photos"] as? [NSDictionary] {
+            //make the photo fit the aspect ratio
+            let width = photos[0].value(forKeyPath: "original_size.width") as! CGFloat
+            let height = photos[0].value(forKeyPath: "original_size.height") as! CGFloat
+            let aspectRatio = height/width
+            
+            cell.photoView?.widthAnchor.constraint(equalTo: (cell.contentView.widthAnchor)).isActive = true
+            cell.photoView?.heightAnchor.constraint(equalTo: (cell.photoView?.widthAnchor)!, multiplier:aspectRatio).isActive = true
+            
             let imageUrlString = photos[0].value(forKeyPath: "original_size.url") as? String
             if let imageUrl = URL(string: imageUrlString!) {
-                cell.photoImageView.setImageWith(imageUrl);
+                cell.photoView.setImageWith(imageUrl);
+                
             }
         }
       //  cell.textLabel?.text = "This is row \(indexPath.row)"

@@ -9,14 +9,26 @@
 import UIKit
 
 class PhotoDetailViewController: UIViewController {
-    var url: String?
+    var photo: UIImage?
+    var photoView: UIImageView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        self.view.backgroundColor = .white
+        self.view.translatesAutoresizingMaskIntoConstraints = true
+        self.edgesForExtendedLayout = []
+        self.photoView = UIImageView(image: photo)
+        self.view.addSubview(self.photoView!)
+        
+        let width = self.photo?.size.width
+        let height = self.photo?.size.height
+        
+        self.photoView?.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+        self.photoView?.widthAnchor.constraint(equalToConstant: width!).isActive = true
+        self.photoView?.heightAnchor.constraint(equalToConstant: height!).isActive = true
     }
-
+   
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

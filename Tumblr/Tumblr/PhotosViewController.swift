@@ -28,6 +28,8 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
         self.tableView.refreshControl?.addTarget(self, action: #selector(refreshTable), for: UIControlEvents.allEvents);
         
         self.tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 320, height: 50))
+        self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        
         let loadingview = UIActivityIndicatorView(activityIndicatorStyle: .gray)
         loadingview.startAnimating()
         loadingview.center = (self.tableView.tableFooterView?.center)!

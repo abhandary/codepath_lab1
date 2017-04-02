@@ -16,7 +16,9 @@ class PhotoDetailViewController: UIViewController {
         super.viewDidLoad()
         
         self.view.backgroundColor = .white
-        self.view.translatesAutoresizingMaskIntoConstraints = true
+        //self.view.translatesAutoresizingMaskIntoConstraints = false
+        //self.photoView?.translatesAutoresizingMaskIntoConstraints = false
+        
         self.edgesForExtendedLayout = []
         self.photoView = UIImageView(image: photo)
         self.view.addSubview(self.photoView!)

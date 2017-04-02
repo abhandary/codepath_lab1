@@ -16,20 +16,28 @@ class PhotoDetailViewController: UIViewController {
     var blogView: UILabel = UILabel()
     var content: UIView = UIView()
     override func viewDidLoad() {
+    
         super.viewDidLoad()
         self.edgesForExtendedLayout = []
         self.view.backgroundColor = .white
+        self.automaticallyAdjustsScrollViewInsets = false
         self.scrollview?.translatesAutoresizingMaskIntoConstraints = false
         self.content.translatesAutoresizingMaskIntoConstraints = false
         self.scrollview = UIScrollView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
         self.view.addSubview(scrollview!)
         self.scrollview?.addSubview(self.content)
-        
+       
         self.content.bottomAnchor.constraint(equalTo: (self.scrollview?.bottomAnchor)!).isActive = true
         self.content.topAnchor.constraint(equalTo: (self.scrollview?.topAnchor)!).isActive = true
         self.photoView?.translatesAutoresizingMaskIntoConstraints = false
-        self.blogView.translatesAutoresizingMaskIntoConstraints = false
         self.photoView = UIImageView(image: photo)
+        self.photoView?.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(ontapPhoto))
+        tap.numberOfTapsRequired = 2
+        self.photoView?.addGestureRecognizer(tap)
+        
+        self.blogView.translatesAutoresizingMaskIntoConstraints = false
+       
         self.content.addSubview(self.photoView!)
         let width = self.photo?.size.width
         let height = self.photo?.size.height
@@ -40,19 +48,32 @@ class PhotoDetailViewController: UIViewController {
         self.photoView?.heightAnchor.constraint(lessThanOrEqualTo: (self.photoView?.widthAnchor)!, multiplier: ratio).isActive = true
     
         self.content.addSubview(self.blogView)
+        self.blogView.textAlignment = .justified
+        self.blogView.lineBreakMode = .byWordWrapping
         self.blogView.preferredMaxLayoutWidth = self.view.frame.size.width - 20
         self.blogView.leadingAnchor.constraint(equalTo: self.content.leadingAnchor, constant: 10).isActive = true
         self.blogView.trailingAnchor.constraint(equalTo: self.content.trailingAnchor, constant: -10).isActive = true
         
         let str = self.blog?.replacingOccurrences(of: "<[^>]*>", with: "", options: .regularExpression, range: nil)
        
-        self.blogView.topAnchor.constraint(equalTo: (self.photoView?.bottomAnchor)!, constant: 5).isActive = true
+        self.blogView.topAnchor.constraint(equalTo: (self.photoView?.bottomAnchor)!).isActive = true
         self.blogView.bottomAnchor.constraint(equalTo: self.content.bottomAnchor).isActive = true
         self.blogView.numberOfLines = 0
         self.blogView.text = str
     
     }
-   
+    
+    func ontapPhoto() {
+        self.performSegue(withIdentifier: "FullScreenPhoto", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "FullScreenPhoto" {
+           let vc =  segue.destination as! FullScreenViewController
+           vc.image = self.photoView?.image
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

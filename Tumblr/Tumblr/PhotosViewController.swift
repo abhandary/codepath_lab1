@@ -16,6 +16,7 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
     var loadingview = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Ready to read?"
         self.edgesForExtendedLayout = []
         self.tableView.dataSource = self;
         self.tableView.delegate = self;
@@ -56,9 +57,10 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
                     self?.tableView.refreshControl?.endRefreshing();
                     
                     NSLog("response: \(responseDictionary)")
-                    
+                
                     let dictionary = responseDictionary.value(forKey: "response") as! NSDictionary
                     self?.posts = dictionary["posts"] as! [NSDictionary]
+                    self?.title = dictionary.value(forKeyPath: "blog.title") as! String?
                     self?.tableView.reloadData();
                     self?.isMoreDataLoading = false
                     self?.loadingview.stopAnimating()

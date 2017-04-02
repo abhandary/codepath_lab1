@@ -17,33 +17,24 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
     var posts: [NSDictionary] = []
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.view.translatesAutoresizingMaskIntoConstraints = false
-        //self.tableView.translatesAutoresizingMaskIntoConstraints = false
-        
         self.edgesForExtendedLayout = []
         self.tableView.dataSource = self;
         self.tableView.delegate = self;
         self.tableView.rowHeight = UITableViewAutomaticDimension;
         self.tableView.estimatedRowHeight = 100
         self.tableView.refreshControl = UIRefreshControl();
-        self.tableView.tableHeaderView = UIView(frame:CGRect.zero)
+        self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
         self.tableView.refreshControl?.addTarget(self, action: #selector(refreshTable), for: UIControlEvents.allEvents);
-        
         
         self.tableView.sectionHeaderHeight = UITableViewAutomaticDimension;
         self.tableView.estimatedSectionHeaderHeight = 70;
         
-        //self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
-        //self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-        //self.tableView.widthAnchor.constraint(equalTo:self.view.widthAnchor).isActive = true
-        //self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-        
-        let footerview = UIView(frame: CGRect(x: 0, y: 0, width: 320, height: 50))
+        let footerview = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50))
         let loadingview = UIActivityIndicatorView(activityIndicatorStyle: .gray)
         loadingview.startAnimating()
         loadingview.center = (footerview.center)
         footerview.addSubview(loadingview)
-        
+        self.tableView.tableFooterView = footerview
         
         refreshTable();
         // Do any additional setup after loading the view, typically from a nib.
@@ -111,7 +102,6 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
         headerView.backgroundColor = UIColor(white: 1, alpha: 0.9)
         let profiileView = UIImageView()
         
-        //headerView.translatesAutoresizingMaskIntoConstraints = false
         profiileView.translatesAutoresizingMaskIntoConstraints = false
         namelabel.translatesAutoresizingMaskIntoConstraints = false
         datelabel.translatesAutoresizingMaskIntoConstraints = false
@@ -140,25 +130,10 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
         content.addArrangedSubview(namelabel)
         content.addArrangedSubview(datelabel)
         
-       
-        
-        
-        //profiileView.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 10).isActive = true
-        //profiileView.centerYAnchor.constraint(equalTo: headerView.centerYAnchor).isActive = true
-        //namelabel.leadingAnchor.constraint(equalTo: profiileView.trailingAnchor, constant: 10).isActive = true
-        //datelabel.leadingAnchor.constraint(equalTo: namelabel.trailingAnchor, constant: 10).isActive = true
-        //datelabel.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -20).isActive = true
         return headerView
     }
-
-    //func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        
-    //}
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
@@ -170,10 +145,7 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "com.tumblr.cell", for: indexPath) as! PhotoCell
-        //cell.translatesAutoresizingMaskIntoConstraints = false
-        //cell.contentView.translatesAutoresizingMaskIntoConstraints = false
-        //cell.photoView.translatesAutoresizingMaskIntoConstraints = false
-        
+
         let post = posts[indexPath.section]
         if let photos = post["photos"] as? [NSDictionary] {
             //make the photo fit the aspect ratio

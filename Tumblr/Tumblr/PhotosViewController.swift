@@ -74,6 +74,10 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
             let cell = sender as? PhotoCell
             let vc = segue.destination as! PhotoDetailViewController
             vc.photo = (cell?.photoView?.image)!
+            let indexPath: IndexPath = tableView.indexPath(for: cell!)!
+            let section = indexPath.section
+            let blog = self.posts[section].value(forKey: "caption")
+            vc.blog = blog as! String?
         }
     }
     

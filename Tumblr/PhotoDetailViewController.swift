@@ -11,7 +11,7 @@ import UIKit
 class PhotoDetailViewController: UIViewController {
     var photo: UIImage?
     var photoView: UIImageView?
-    
+    var blog: String?
     override func viewDidLoad() {
         super.viewDidLoad()
         

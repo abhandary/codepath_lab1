@@ -9,12 +9,11 @@
 import UIKit
 import AFNetworking
 
-
-
-class PhotosViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class PhotosViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate {
     @IBOutlet weak var tableView: UITableView!
-    
+    var isMoreDataLoading = false
     var posts: [NSDictionary] = []
+    var loadingview = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     override func viewDidLoad() {
         super.viewDidLoad()
         self.edgesForExtendedLayout = []
@@ -30,8 +29,6 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
         self.tableView.estimatedSectionHeaderHeight = 70;
         
         let footerview = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50))
-        let loadingview = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-        loadingview.startAnimating()
         loadingview.center = (footerview.center)
         footerview.addSubview(loadingview)
         self.tableView.tableFooterView = footerview
@@ -63,6 +60,8 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
                     let dictionary = responseDictionary.value(forKey: "response") as! NSDictionary
                     self?.posts = dictionary["posts"] as! [NSDictionary]
                     self?.tableView.reloadData();
+                    self?.isMoreDataLoading = false
+                    self?.loadingview.stopAnimating()
                 }
             }
             });
@@ -143,6 +142,7 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
         return self.posts.count
     }
     
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "com.tumblr.cell", for: indexPath) as! PhotoCell
 
@@ -165,6 +165,23 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
         return cell
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard !isMoreDataLoading else {
+            return
+        }
+
+        
+        let scrollViewContentHeight = tableView.contentSize.height
+        let threshold =  scrollViewContentHeight - tableView.bounds.size.height
+        
+        if(scrollView.contentOffset.y > threshold && tableView.isDragging) {
+            isMoreDataLoading = true
+            refreshTable()
+            loadingview.startAnimating()
+        }
+        
+        
+    }
  
 
 }
